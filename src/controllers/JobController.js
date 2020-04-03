@@ -1,5 +1,5 @@
 const connection = require('../database/connection');
-const crypto = require('crypto');
+const generateUniqueId = require('../utils/generateUniqueId');
 
 module.exports = {
   async index(request, response) {
@@ -14,7 +14,7 @@ module.exports = {
   async create(request, response) {
     const { role, description, project, projectmanager } = request.body;
 
-    const id = crypto.randomBytes(4).toString('HEX');
+    const id = generateUniqueId();
     const status = 'open';
 
     await connection('jobs').insert({
